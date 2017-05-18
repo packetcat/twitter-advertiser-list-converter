@@ -12,6 +12,11 @@ You can install these via pip.
 - PyPDF2
 - python-twitter
 
+## Twitter API key requirements
+To use this script you will need a set of Twitter API credentials.
+
+This can be obtained via [Twitter Application Management](https://apps.twitter.com/).
+
 ## Input file requirements
 To use this script you will need a PDF list of your Twitter advertisers.
 
