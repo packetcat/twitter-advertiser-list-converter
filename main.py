@@ -14,6 +14,7 @@ parser.add_argument('-i', dest='inputpdf', type=str, help='PDF input file', defa
 parser.add_argument('-o', dest='outputcsv', type=str, help='CSV output file', default='advertisers.csv')
 args = parser.parse_args()
 
+# Create the PDF file object
 pdfFileObj = open(args.inputpdf, 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 numberOfPages = pdfReader.getNumPages()
@@ -52,6 +53,7 @@ for line in lines:
 finaluserslist.close()
 
 # Now for the Twitter stuff
+# Dictionary for Twitter OAuth credentials
 oauth = {
     'ACCESS_TOKEN_KEY': '',
     'ACCESS_TOKEN_SECRET': '',
@@ -59,11 +61,15 @@ oauth = {
     'CONSUMER_SECRET': '',
 }
 
+# Instantiate Twitter API
 api = twitter.Api(consumer_key=oauth['CONSUMER_KEY'], consumer_secret=oauth['CONSUMER_SECRET'], access_token_key=oauth['ACCESS_TOKEN_KEY'], access_token_secret=oauth['ACCESS_TOKEN_SECRET'])
 
+# Make list of users
 users = [line.strip() for line in open("users.txt").readlines()]
+# Open file handle for the CSV we need
 ids = open(args.outputcsv, 'w')
 
+# Loop that gets the user ID of each user and writes it to the CSV
 for user in users:
     try:
         userdata = api.GetUser(screen_name=user)
