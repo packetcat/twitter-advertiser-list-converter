@@ -55,7 +55,7 @@ oauth = {
 api = twitter.Api(consumer_key=oauth['CONSUMER_KEY'], consumer_secret=oauth['CONSUMER_SECRET'], access_token_key=oauth['ACCESS_TOKEN_KEY'], access_token_secret=oauth['ACCESS_TOKEN_SECRET'])
 
 users = [line.strip() for line in open("users.txt").readlines()]
-ids = open('ids.txt', 'w')
+ids = open('advertisers.csv', 'w')
 
 for user in users:
     try:
