@@ -4,6 +4,8 @@
 # Editorial - Use Mastodon instead.
 
 import PyPDF2
+import twitter
+import time
 
 pdfFileObj = open('C:\\Users\\sadiq\\Downloads\\temp\\twitter_advertiser_list.pdf', 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
@@ -41,3 +43,25 @@ for line in lines:
     if line != "Your Twitter Advertisers"+"\n":
         finaluserslist.write(line)
 finaluserslist.close()
+
+# Now for the Twitter stuff
+oauth = {
+    'ACCESS_TOKEN_KEY': '',
+    'ACCESS_TOKEN_SECRET': '',
+    'CONSUMER_KEY': '',
+    'CONSUMER_SECRET': '',
+}
+
+api = twitter.Api(consumer_key=oauth['CONSUMER_KEY'], consumer_secret=oauth['CONSUMER_SECRET'], access_token_key=oauth['ACCESS_TOKEN_KEY'], access_token_secret=oauth['ACCESS_TOKEN_SECRET'])
+
+users = [line.strip() for line in open("users.txt").readlines()]
+ids = open('ids.txt', 'w')
+
+for user in users:
+    userdata = api.GetUser(screen_name=user)
+    id = str(userdata.id)
+    print(id)
+    ids.write(id + "\n")
+    time.sleep(1)
+ids.write("\b")
+ids.close()
