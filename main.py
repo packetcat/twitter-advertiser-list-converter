@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Project name - twitter-advertiser-list-converter
 # Author - staticsafe
 # Purpose - Converts Twitter provided advertiser list PDF to a CSV file of user-ids that can be imported as a blocklist.
