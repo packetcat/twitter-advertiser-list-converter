@@ -7,12 +7,18 @@ import PyPDF2
 import twitter
 import time
 import argparse
+import configparser
 
 # Command line argument parsing
 parser = argparse.ArgumentParser(description='Converts Twitter provided advertiser list PDF->CSV file of UIDs.')
+parser.add_argument('-c', dest='configfile', type=str, help='Config file path', default='config.ini')
 parser.add_argument('-i', dest='inputpdf', type=str, help='PDF input file', default='twitter_advertiser_list.pdf')
 parser.add_argument('-o', dest='outputcsv', type=str, help='CSV output file', default='advertisers.csv')
 args = parser.parse_args()
+
+# Config file parsing
+config = configparser.ConfigParser()
+config.read(args.configfile)
 
 # Create the PDF file object
 pdfFileObj = open(args.inputpdf, 'rb')
@@ -55,10 +61,10 @@ finaluserslist.close()
 # Now for the Twitter stuff
 # Dictionary for Twitter OAuth credentials
 oauth = {
-    'ACCESS_TOKEN_KEY': '',
-    'ACCESS_TOKEN_SECRET': '',
-    'CONSUMER_KEY': '',
-    'CONSUMER_SECRET': '',
+    'ACCESS_TOKEN_KEY': config['twitter.com']['ACCESS_TOKEN_KEY'],
+    'ACCESS_TOKEN_SECRET': config['twitter.com']['ACCESS_TOKEN_SECRET'],
+    'CONSUMER_KEY': config['twitter.com']['CONSUMER_KEY'],
+    'CONSUMER_SECRET': config['twitter.com']['CONSUMER_SECRET'],
 }
 
 # Instantiate Twitter API
