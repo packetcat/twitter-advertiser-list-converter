@@ -22,8 +22,22 @@ extractedusers = []
 for users in range(len(userpages)):
     extractedusers.append(userpages[users].split("@"))
 
-#stringofusers = str(extractedusers)
+# Clean up and write file of users
 
-#print(stringofusers)
+# Loop to write users list into file
+finaluserslist = open('users.txt', 'w')
+for items in extractedusers:
+    finaluserslist.write("\n".join(items))
+finaluserslist.close()
 
-#print("\n".join(stringofusers.split(',')))
+# We need all the lines for some cleanup
+finaluserslist = open('users.txt', 'r')
+lines = finaluserslist.readlines()
+finaluserslist.close()
+
+# Cleanup extraneous text before writing the final file
+finaluserslist = open('users.txt', 'w')
+for line in lines:
+    if line != "Your Twitter Advertisers"+"\n":
+        finaluserslist.write(line)
+finaluserslist.close()
