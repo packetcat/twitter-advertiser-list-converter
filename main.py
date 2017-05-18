@@ -9,8 +9,21 @@ pdfFileObj = open('C:\\Users\\sadiq\\Downloads\\temp\\twitter_advertiser_list.pd
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 numberOfPages = pdfReader.getNumPages()
 pageObj = []
+userpages = []
+
+# Iterate through each page in PDF and then make a list of unmodified users
 for pages in range(numberOfPages):
     pageObj.append(pdfReader.getPage(pages))
-    print(pageObj[pages].extractText())
+    userpages.append(pageObj[pages].extractText())
 
+# Iterate through the userpages list and create another list
+extractedusers = []
 
+for users in range(len(userpages)):
+    extractedusers.append(userpages[users].split("@"))
+
+#stringofusers = str(extractedusers)
+
+#print(stringofusers)
+
+#print("\n".join(stringofusers.split(',')))
