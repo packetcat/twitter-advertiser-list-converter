@@ -6,8 +6,15 @@
 import PyPDF2
 import twitter
 import time
+import argparse
 
-pdfFileObj = open('C:\\Users\\sadiq\\Downloads\\temp\\twitter_advertiser_list.pdf', 'rb')
+# Command line argument parsing
+parser = argparse.ArgumentParser(description='Converts Twitter provided advertiser list PDF->CSV file of UIDs.')
+parser.add_argument('-i', dest='inputpdf', type=str, help='PDF input file', default='twitter_advertiser_list.pdf')
+parser.add_argument('-o', dest='outputcsv', type=str, help='CSV output file', default='advertisers.csv')
+args = parser.parse_args()
+
+pdfFileObj = open(args.inputpdf, 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 numberOfPages = pdfReader.getNumPages()
 pageObj = []
@@ -55,7 +62,7 @@ oauth = {
 api = twitter.Api(consumer_key=oauth['CONSUMER_KEY'], consumer_secret=oauth['CONSUMER_SECRET'], access_token_key=oauth['ACCESS_TOKEN_KEY'], access_token_secret=oauth['ACCESS_TOKEN_SECRET'])
 
 users = [line.strip() for line in open("users.txt").readlines()]
-ids = open('advertisers.csv', 'w')
+ids = open(args.outputcsv, 'w')
 
 for user in users:
     try:
