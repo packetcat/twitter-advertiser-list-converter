@@ -58,7 +58,12 @@ users = [line.strip() for line in open("users.txt").readlines()]
 ids = open('ids.txt', 'w')
 
 for user in users:
-    userdata = api.GetUser(screen_name=user)
+    try:
+        userdata = api.GetUser(screen_name=user)
+    except twitter.error.TwitterError as e:
+        print("Unable to get user {}: {}".format(user, e))
+        time.sleep(1)
+        continue
     id = str(userdata.id)
     print(id)
     ids.write(id + "\n")
