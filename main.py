@@ -88,5 +88,4 @@ for user in users:
     print(id)
     ids.write(id + "\n")
     time.sleep(1)
-ids.write("\b")
 ids.close()
