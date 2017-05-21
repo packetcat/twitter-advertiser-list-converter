@@ -69,7 +69,8 @@ oauth = {
 }
 
 # Instantiate Twitter API
-api = twitter.Api(consumer_key=oauth['CONSUMER_KEY'], consumer_secret=oauth['CONSUMER_SECRET'], access_token_key=oauth['ACCESS_TOKEN_KEY'], access_token_secret=oauth['ACCESS_TOKEN_SECRET'])
+api = twitter.Api(consumer_key=oauth['CONSUMER_KEY'], consumer_secret=oauth['CONSUMER_SECRET'],
+                  access_token_key=oauth['ACCESS_TOKEN_KEY'], access_token_secret=oauth['ACCESS_TOKEN_SECRET'])
 
 # Make list of users
 users = [line.strip() for line in open("users.txt").readlines()]
